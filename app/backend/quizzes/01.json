@@ -1,0 +1,32 @@
+{
+  "id": "01",
+  "title": "Encontro 1: a arquitetura completa",
+  "released": true,
+  "questions": [
+    {
+      "text": "Qual serviço autentica os usuários do quiz?",
+      "options": ["Amazon Cognito", "AWS IAM", "Amazon API Gateway", "AWS Lambda"],
+      "answer": 0
+    },
+    {
+      "text": "O que o API Gateway faz antes de chamar a Lambda?",
+      "options": ["Valida o token JWT do usuário", "Grava a resposta no DynamoDB", "Gera os arquivos do front", "Redimensiona a foto do mural"],
+      "answer": 0
+    },
+    {
+      "text": "Onde ficam guardadas as respostas e a pontuação?",
+      "options": ["Amazon S3", "Amazon DynamoDB", "Amazon RDS", "Na memória da Lambda"],
+      "answer": 1
+    },
+    {
+      "text": "Como a foto do mural chega ao S3?",
+      "options": ["Passa pela Lambda em base64", "O navegador envia direto, com uma URL pré-assinada", "Pelo CloudFront", "Pelo API Gateway"],
+      "answer": 1
+    },
+    {
+      "text": "Quem entrega os arquivos do front para o navegador?",
+      "options": ["AWS Lambda", "Amazon API Gateway", "Amazon CloudFront, lendo do S3", "Amazon DynamoDB"],
+      "answer": 2
+    }
+  ]
+}
