@@ -1,16 +1,30 @@
 import { useState } from 'react'
 import { Link } from 'react-router'
 
-export function Button({ variant = 'primary', className = '', ...props }) {
+export function Button({ variant = 'primary', loading = false, className = '', children, disabled, ...props }) {
   const styles = {
     primary: 'bg-primary text-white hover:bg-primary-hover',
     secondary: 'border border-zinc-300 text-zinc-700 hover:bg-zinc-50',
   }
   return (
     <button
-      className={`rounded-lg px-4 py-2.5 text-sm font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-50 ${styles[variant]} ${className}`}
+      className={`inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold transition active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 ${styles[variant]} ${className}`}
+      disabled={disabled || loading}
+      aria-busy={loading}
       {...props}
-    />
+    >
+      {loading && <Spinner />}
+      {children}
+    </button>
+  )
+}
+
+function Spinner() {
+  return (
+    <svg className="size-4 animate-spin" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" className="opacity-25" />
+      <path d="M22 12a10 10 0 0 0-10-10" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
+    </svg>
   )
 }
 
@@ -57,6 +71,9 @@ export function TextLink(props) {
   return <Link className="text-sm font-semibold text-primary hover:text-primary-hover" {...props} />
 }
 
+// Entra com fade + slide via @starting-style (variant `starting:` do Tailwind v4).
 export function ErrorMessage({ children }) {
-  return children ? <p className="text-sm text-red-600">{children}</p> : null
+  if (!children) return null
+  // TODO(human): retornar o alerta estruturado (role="alert", ícone, fundo e borda, animação de entrada)
+  return <p className="text-sm text-red-600">{children}</p>
 }
