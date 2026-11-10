@@ -1,5 +1,6 @@
 import { Navigate, NavLink, Outlet, Route, Routes, useNavigate } from 'react-router'
 import { currentUser, signOut } from './auth'
+import Confirm from './pages/Confirm'
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Mural from './pages/Mural'
@@ -11,7 +12,8 @@ export default function App() {
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
-      <Route path="/cadastro" element={<SignUp />} />
+      <Route path="/signup" element={<SignUp />} />
+      <Route path="/confirm" element={<Confirm />} />
       <Route element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="quiz/:id" element={<Quiz />} />
@@ -41,7 +43,7 @@ function Layout() {
           </nav>
           <button
             className="ml-auto text-zinc-500 hover:text-zinc-900"
-            onClick={() => { signOut(); navigate('/login') }}
+            onClick={async () => { await signOut(); navigate('/login') }}
           >
             Sair
           </button>

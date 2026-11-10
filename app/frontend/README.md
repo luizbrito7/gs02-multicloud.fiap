@@ -7,4 +7,4 @@ npm install
 npm run dev   # http://localhost:5173 (precisa do backend rodando)
 ```
 
-O login ainda é local (`src/auth.js`). Na etapa do Cognito ele passa a usar aws-amplify.
+Login pelo Cognito com aws-amplify (`src/auth.js`). Preencha `VITE_USER_POOL_ID` e `VITE_USER_POOL_CLIENT_ID` no `.env.development` com o `terraform output` da pasta `terraform/`.
