@@ -13,7 +13,7 @@ Amplify.configure({
 const messages = {
   NotAuthorizedException: 'E-mail ou senha incorretos.',
   UsernameExistsException: 'Este e-mail já está cadastrado.',
-  InvalidPasswordException: 'A senha não segue as regras abaixo do campo.',
+  InvalidPasswordException: 'A senha precisa de 8 caracteres, com maiúscula, minúscula, número e símbolo.',
   CodeMismatchException: 'Código inválido.',
   ExpiredCodeException: 'Código expirado. Peça um novo.',
   LimitExceededException: 'Muitas tentativas. Tente de novo em alguns minutos.',

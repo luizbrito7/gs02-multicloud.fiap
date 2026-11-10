@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react'
+import { toast } from 'sonner'
 import { useParams } from 'react-router'
 import { api } from '../api'
-import { Button, ErrorMessage, TextLink } from '../ui'
+import { Button, TextLink } from '../ui'
 
 export default function Quiz() {
   const { id } = useParams()
   const [quiz, setQuiz] = useState()
   const [answers, setAnswers] = useState([])
   const [step, setStep] = useState(0)
-  const [error, setError] = useState()
 
   useEffect(() => {
     api(`/quizzes/${id}`).then(setQuiz)
@@ -38,7 +38,7 @@ export default function Quiz() {
       const { score } = await api(`/quizzes/${id}/answers`, { method: 'POST', body: { answers } })
       setQuiz({ ...quiz, score })
     } catch (err) {
-      setError(err.message)
+      toast.error(err.message)
     }
   }
 
@@ -75,7 +75,6 @@ export default function Quiz() {
           {isLast ? 'Enviar respostas' : 'Próxima'}
         </Button>
       </div>
-      <div className="mt-4"><ErrorMessage>{error}</ErrorMessage></div>
     </>
   )
 }

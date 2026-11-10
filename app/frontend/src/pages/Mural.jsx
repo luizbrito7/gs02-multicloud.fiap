@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react'
+import { toast } from 'sonner'
 import { useParams } from 'react-router'
 import { api } from '../api'
-import { ErrorMessage } from '../ui'
 
 export default function Mural() {
   const { id } = useParams()
   const [photos, setPhotos] = useState([])
   const [sending, setSending] = useState(false)
-  const [error, setError] = useState()
 
   useEffect(() => {
     api(`/quizzes/${id}/mural`).then(setPhotos)
@@ -17,13 +16,12 @@ export default function Mural() {
     const file = event.target.files[0]
     if (!file) return
     setSending(true)
-    setError()
     try {
       const { url } = await api(`/quizzes/${id}/photo`, { method: 'POST', body: { contentType: file.type } })
       await fetch(url, { method: 'PUT', body: file, headers: { 'Content-Type': file.type } })
       setPhotos(await api(`/quizzes/${id}/mural`))
     } catch (err) {
-      setError(err.message)
+      toast.error(err.message)
     } finally {
       setSending(false)
       event.target.value = ''
@@ -42,7 +40,6 @@ export default function Mural() {
           <input type="file" accept="image/jpeg,image/png,image/webp" className="hidden" onChange={upload} disabled={sending} />
         </label>
       </div>
-      <div className="mt-4"><ErrorMessage>{error}</ErrorMessage></div>
 
       {photos.length === 0 ? (
         <p className="mt-8 text-sm text-zinc-500">Nenhuma foto ainda.</p>
