@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
-@theme {
+@theme inline {
   --font-sans: "Poppins", sans-serif;
+  --color-primary: var(--color-violet-600);
+  --color-primary-hover: var(--color-violet-700);
 }
