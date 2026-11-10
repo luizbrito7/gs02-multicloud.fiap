@@ -21,7 +21,7 @@ const cors = {
 createServer(async (req, res) => {
   if (req.method === 'OPTIONS') return res.writeHead(204, cors).end()
 
-  // Local o token é o JSON das claims; na AWS o authorizer do API Gateway valida o JWT do Cognito.
+  // Local só lê as claims do JWT do Cognito; na AWS o authorizer do API Gateway valida a assinatura.
   const token = req.headers.authorization?.replace('Bearer ', '')
   if (!token) return res.writeHead(401, cors).end(JSON.stringify({ message: 'Não autenticado.' }))
 
@@ -35,7 +35,7 @@ createServer(async (req, res) => {
     body: body || undefined,
     requestContext: {
       http: { method: req.method },
-      authorizer: { jwt: { claims: JSON.parse(decodeURIComponent(token)) } },
+      authorizer: { jwt: { claims: JSON.parse(Buffer.from(token.split('.')[1], 'base64url')) } },
     },
   }, {})
   res.writeHead(result.statusCode, { ...cors, ...result.headers }).end(result.body)

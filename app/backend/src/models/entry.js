@@ -24,7 +24,7 @@ export function saveScore(quizId, user, score) {
     UpdateExpression: 'SET score = :score, #name = :name',
     ConditionExpression: 'attribute_not_exists(score)',
     ExpressionAttributeNames: { '#name': 'name' },
-    ExpressionAttributeValues: { ':score': score, ':name': user.name },
+    ExpressionAttributeValues: { ':score': score, ':name': user.email },
   }))
 }
 
@@ -34,6 +34,6 @@ export function savePhoto(quizId, user, photo) {
     Key: { quizId, userId: user.sub },
     UpdateExpression: 'SET photo = :photo, #name = :name',
     ExpressionAttributeNames: { '#name': 'name' },
-    ExpressionAttributeValues: { ':photo': photo, ':name': user.name },
+    ExpressionAttributeValues: { ':photo': photo, ':name': user.email },
   }))
 }
