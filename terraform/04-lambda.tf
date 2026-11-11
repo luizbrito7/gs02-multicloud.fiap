@@ -72,10 +72,12 @@ resource "aws_lambda_function" "this" {
       BUCKET_NAME = aws_s3_bucket.wall.bucket
     }
   }
+
+  depends_on = [aws_cloudwatch_log_group.lambda]
 }
 
 # [DOC] - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_group
 resource "aws_cloudwatch_log_group" "lambda" {
-  name              = "/aws/lambda/${aws_lambda_function.this.function_name}"
+  name              = "/aws/lambda/lambda-${local.project}-${local.env}"
   retention_in_days = 7
 }
