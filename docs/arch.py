@@ -1,5 +1,5 @@
 # Spec do diagrama animado (skill architecture-diagrams), layers em colunas. Mesmos recursos de docs/architecture.drawio.
-# Render: ~/.claude/skills/architecture-diagrams/.venv/bin/python ~/.claude/skills/architecture-diagrams/scripts/diagram.py docs/arch.py docs/arch.gif
+# Render: ~/.claude/skills/architecture-diagrams/.venv/bin/python ~/.claude/skills/architecture-diagrams/scripts/diagram.py docs/arch.py docs/architecture.gif
 O = -100  # sobe tudo: sem título
 
 W, H = 1560, 660
