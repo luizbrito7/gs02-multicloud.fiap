@@ -1,6 +1,6 @@
 <h1 align="center">Quiz Guilda DevOps</h1>
 
-<p align="center"><img src="docs/architecture.gif" alt="Arquitetura AWS do Quiz Guilda DevOps: front-end-layer, back-end-layer e data-layer" /></p>
+<p align="center"><img src="docs/arquitetura/architecture.gif" alt="Arquitetura AWS do Quiz Guilda DevOps: front-end-layer, back-end-layer e data-layer" /></p>
 
 Quiz serverless na AWS para os encontros da guilda DevOps: cadastro e login, um quiz por encontro, mural de fotos e ranking. Global Solution de Cloud Computing da FIAP.
 
@@ -15,9 +15,10 @@ Quiz serverless na AWS para os encontros da guilda DevOps: cadastro e login, um 
 
 | Quero... | Vá para |
 |---|---|
-| Subir tudo na minha conta AWS | [Passo a passo](docs/passo-a-passo.md) ([PDF](docs/passo-a-passo.pdf)) |
+| Subir tudo na minha conta AWS | [Passo a passo](docs/passo-a-passo/passo-a-passo.md) ([PDF](docs/passo-a-passo/passo-a-passo.pdf)) |
 | Entender o produto | [PRD](docs/prd.md) |
 | Entender as decisões técnicas | [TRD](docs/trd/) |
 | Rodar o front ou o back local | [app/frontend](app/frontend/README.md) · [app/backend](app/backend/README.md) |
 | Ver a infraestrutura | [terraform/](terraform/) |
 | Ler o artigo | [Artigo ABNT](docs/artigo/artigo.pdf) |
+| Gravar o vídeo | [Roteiro](docs/video/roteiro.md) |
