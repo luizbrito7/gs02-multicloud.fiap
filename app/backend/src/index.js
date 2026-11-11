@@ -8,9 +8,11 @@ const logger = new Logger({ serviceName: 'backend' })
 export const handler = async (event, context) => {
   logger.addContext(context)
   const method = event.requestContext.http.method
-  const [, resource, id, action] = event.rawPath.split('/')
+  // Em stage nomeado (ex.: lab) o rawPath vem com o prefixo /lab; tiramos para rotear.
+  const path = event.rawPath.replace(`/${event.requestContext.stage}/`, '/')
+  const [, resource, id, action] = path.split('/')
   const route = routes[`${method} /${[resource, id && ':id', action].filter(Boolean).join('/')}`]
-  logger.info('request', { method, path: event.rawPath })
+  logger.info('request', { method, path })
 
   try {
     if (!route) fail(404, 'Rota não encontrada.')
