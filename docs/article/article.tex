@@ -1,5 +1,5 @@
 % Artigo no padrão ABNT (NBR 6022, 6023, 10520 e 6028) com a classe abnTeX2.
-% Compila no Overleaf sem ajustes: envie artigo.tex, referencias.bib e arquitetura.png.
+% Compila no Overleaf sem ajustes: envie article.tex, references.bib e architecture.png.
 \documentclass[article, 12pt, oneside, a4paper, english, brazil, sumario=tradicional]{abntex2}
 
 \usepackage[T1]{fontenc}
@@ -105,7 +105,7 @@ A Figura~\ref{fig:arquitetura} mostra a arquitetura, dividida em três camadas d
 \begin{figure}[htb]
   \caption{\label{fig:arquitetura}Arquitetura do QuizOps na AWS}
   \begin{center}
-    \includegraphics[width=\textwidth]{arquitetura.png}
+    \includegraphics[width=\textwidth]{architecture.png}
   \end{center}
   \legend{Fonte: elaborado pelo autor (2026).}
 \end{figure}
@@ -189,6 +189,6 @@ O trabalho apresentou o QuizOps, uma aplicação serverless completa na AWS, des
 
 Como trabalhos futuros, sugerem-se a troca das chaves estáticas por OpenID Connect nos fluxos de entrega, um índice ou tabela agregada para o ranking geral e a implementação da mesma arquitetura no Google Cloud com Terraform, para comparar custo e esforço entre os provedores.
 
-\bibliography{referencias}
+\bibliography{references}
 
 \end{document}
