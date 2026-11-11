@@ -1,0 +1,26 @@
+name: cicd-front
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [app/frontend/**]
+
+env:
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  AWS_DEFAULT_REGION: us-east-1
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app/frontend
+    steps:
+      - uses: actions/checkout@v7
+      - run: npm ci && npm run build
+      - run: aws s3 sync dist s3://front-quiz-lab --delete
+      - run: |
+          ID=$(aws cloudfront list-distributions --query "DistributionList.Items[?Origins.Items[0].DomainName=='front-quiz-lab.s3.us-east-1.amazonaws.com'].Id" --output text)
+          aws cloudfront create-invalidation --distribution-id $ID --paths "/*"
