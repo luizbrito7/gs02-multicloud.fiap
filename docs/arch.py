@@ -1,42 +1,40 @@
-# Spec do diagrama animado (skill architecture-diagrams). Mesmo layout de docs/architecture.drawio.
+# Spec do diagrama animado (skill architecture-diagrams), layers em colunas. Mesmos recursos de docs/architecture.drawio.
 # Render: ~/.claude/skills/architecture-diagrams/.venv/bin/python ~/.claude/skills/architecture-diagrams/scripts/diagram.py docs/arch.py docs/arch.gif
-O = 70  # espaço do título
+O = -100  # sobe tudo: sem título
 
-W, H = 980, 1420
-TITLE = 'Quiz Guilda DevOps · arquitetura AWS'
-SUBTITLE = 'front-end-layer · back-end-layer · data-layer'
+W, H = 1560, 660
 
 LAYER = dict(fill='#F8F9FA', stroke='#EAEDED', text='#879196')
 
 GROUPS = [
-    dict(style='aws', x=15, y=140 + O, w=950, h=1185, label='AWS Cloud'),
-    dict(style='plain', x=55, y=185 + O, w=870, h=1100, label='us-east-1',
+    dict(style='aws', x=170, y=140 + O, w=1360, h=590, label='AWS Cloud'),
+    dict(style='plain', x=210, y=185 + O, w=1280, h=505, label='us-east-1',
          colors=dict(stroke='#00A4A6', text='#147EBA', icon='Region')),
-    dict(style='soft', x=100, y=250 + O, w=780, h=260, label='front-end-layer', colors=LAYER),
-    dict(style='plain', x=140, y=300 + O, w=400, h=170, label='aplicação web', label_right=True,
+    dict(style='soft', x=250, y=245 + O, w=410, h=405, label='front-end-layer', colors=LAYER),
+    dict(style='plain', x=280, y=280 + O, w=350, h=150, label='aplicação web', label_right=True,
          colors=dict(fill='#F8F9FA', stroke='#D5DBDB', text='#879196')),
-    dict(style='soft', x=100, y=600 + O, w=780, h=370, label='back-end-layer', colors=LAYER),
-    dict(style='soft', x=100, y=1070 + O, w=780, h=170, label='data-layer', colors=LAYER),
+    dict(style='soft', x=760, y=245 + O, w=340, h=405, label='back-end-layer', colors=LAYER),
+    dict(style='soft', x=1180, y=245 + O, w=270, h=405, label='data-layer', colors=LAYER),
 ]
 
 NODES = [
-    dict(icon='Users', x=240, y=40 + O, label=['Guilda DevOps']),
-    dict(icon='AmazonCloudFront', x=240, y=370 + O, label=['CloudFront']),
-    dict(icon='AmazonSimpleStorageService', x=440, y=370 + O, label=['S3 · site']),
-    dict(icon='AmazonCognito', x=780, y=370 + O, label=['Cognito']),
-    dict(icon='AmazonAPIGateway', x=490, y=680 + O, label=['API Gateway']),
-    dict(icon='AWSLambda', x=490, y=890 + O, label=['Lambda']),
-    dict(icon='AmazonSimpleStorageService', x=290, y=1155 + O, label=['S3 · mural']),
-    dict(icon='AmazonDynamoDB', x=690, y=1155 + O, label=['DynamoDB']),
+    dict(icon='Users', x=60, y=360 + O, label=['Guilda DevOps']),
+    dict(icon='AmazonCloudFront', x=360, y=360 + O, label=['CloudFront']),
+    dict(icon='AmazonSimpleStorageService', x=550, y=360 + O, label=['S3 · site']),
+    dict(icon='AmazonCognito', x=455, y=570 + O, label=['Cognito']),
+    dict(icon='AmazonAPIGateway', x=840, y=360 + O, label=['API Gateway']),
+    dict(icon='AWSLambda', x=1020, y=360 + O, label=['Lambda']),
+    dict(icon='AmazonSimpleStorageService', x=1340, y=360 + O, label=['S3 · mural']),
+    dict(icon='AmazonDynamoDB', x=1340, y=570 + O, label=['DynamoDB']),
 ]
 
 EDGES = [
-    dict(points=[(240, 108 + O), (240, 338 + O)], label='HTTPS', label_at=(240, 162 + O)),
-    dict(points=[(272, 370 + O), (408, 370 + O)], label='OAC', label_at=(340, 370 + O)),
-    dict(points=[(540, 370 + O), (748, 370 + O)], label='autenticação', label_at=(660, 370 + O)),
-    dict(points=[(340, 470 + O), (340, 680 + O), (458, 680 + O)], label='HTTPS + JWT', label_at=(340, 555 + O)),
-    dict(points=[(780, 438 + O), (780, 680 + O), (522, 680 + O)], label='valida JWT', label_at=(780, 555 + O)),
-    dict(points=[(490, 748 + O), (490, 858 + O)], label='invoca', label_at=(490, 795 + O)),
-    dict(points=[(490, 958 + O), (490, 1020 + O), (290, 1020 + O), (290, 1123 + O)], label='assina URL', label_at=(380, 1020 + O)),
-    dict(points=[(490, 1020 + O), (690, 1020 + O), (690, 1123 + O)], label='lê / grava', label_at=(600, 1020 + O)),
+    dict(points=[(92, 360 + O), (328, 360 + O)], label='HTTPS', label_at=(130, 360 + O)),
+    dict(points=[(392, 360 + O), (518, 360 + O)], label='OAC', label_at=(455, 360 + O)),
+    dict(points=[(455, 430 + O), (455, 538 + O)], label='autenticação', label_at=(455, 484 + O)),
+    dict(points=[(630, 360 + O), (808, 360 + O)], label='HTTPS + JWT', label_at=(710, 360 + O)),
+    dict(points=[(487, 570 + O), (840, 570 + O), (840, 414 + O)], label='valida JWT', label_at=(710, 570 + O)),
+    dict(points=[(872, 360 + O), (988, 360 + O)], label='invoca', label_at=(930, 360 + O)),
+    dict(points=[(1052, 360 + O), (1308, 360 + O)], label='assina URL', label_at=(1228, 360 + O)),
+    dict(points=[(1140, 360 + O), (1140, 570 + O), (1308, 570 + O)], label='lê / grava', label_at=(1140, 470 + O)),
 ]
