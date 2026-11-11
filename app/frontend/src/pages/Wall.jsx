@@ -87,19 +87,19 @@ export default function Wall() {
             <li
               key={photo.url}
               style={{ transitionDelay: `${i * 60}ms` }}
-              className="transition duration-500 ease-out starting:translate-y-3 starting:opacity-0 motion-reduce:transition-none"
+              className="overflow-hidden rounded-xl border border-zinc-200 bg-white shadow-xs transition duration-500 ease-out hover:border-primary/40 starting:translate-y-3 starting:opacity-0 motion-reduce:transition-none"
             >
               <button
                 onClick={() => setOpen(photo)}
-                className="group relative block w-full overflow-hidden rounded-xl bg-zinc-100 focus-visible:outline-2 focus-visible:outline-primary"
+                className="group relative block w-full overflow-hidden bg-zinc-50 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-primary"
                 aria-label={`Ver foto de ${photo.name}`}
               >
-                <img src={photo.url} alt="" className="aspect-[4/3] w-full object-cover transition duration-300 group-hover:scale-[1.03] motion-reduce:transition-none" />
+                <img src={photo.url} alt="" className="aspect-[4/3] w-full object-contain p-2 transition duration-300 group-hover:scale-[1.03] motion-reduce:transition-none" />
                 <span className="absolute right-2 bottom-2 grid size-8 place-items-center rounded-full bg-white/90 text-zinc-700 opacity-0 shadow-sm transition group-hover:opacity-100 group-focus-visible:opacity-100">
                   <Maximize2 className="size-4" />
                 </span>
               </button>
-              <p className="mt-2 flex items-center gap-2 truncate text-sm text-zinc-700">
+              <p className="flex items-center gap-2 truncate border-t border-zinc-200 px-3 py-2.5 text-sm text-zinc-700">
                 <span className="grid size-6 shrink-0 place-items-center rounded-full bg-primary/10 text-xs font-semibold text-primary uppercase">
                   {photo.name[0]}
                 </span>
