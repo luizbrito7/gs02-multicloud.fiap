@@ -1,13 +1,14 @@
-# Receita de bolo: QuizOps na AWS
+# Passo a passo: QuizOps na AWS
 
-Passo a passo para recriar a aplicação e a arquitetura do zero em outra conta AWS. O Terraform cria a infraestrutura e o GitHub Actions faz o build e o deploy do front e do back. Nada é compilado na sua máquina.
+Como recriar a aplicação e a arquitetura do zero em outra conta AWS. O Terraform cria a infraestrutura e o GitHub Actions faz o build e o deploy do front e do back. Nada é compilado na sua máquina.
 
-## Ingredientes
+## Pré-requisitos
 
 - Conta AWS com permissão de administrador
 - Conta no GitHub
 - [AWS CLI v2](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
 - [Terraform 1.5+](https://developer.hashicorp.com/terraform/install)
+- [GitHub CLI](https://cli.github.com/) autenticado (`gh auth login`)
 - Git
 
 ## 1. Fazer o fork e clonar
@@ -63,17 +64,16 @@ Leva alguns minutos (o CloudFront é o mais lento). No fim, o Terraform mostra o
 2. Em **Settings → Secrets and variables → Actions**, crie `AWS_ACCESS_KEY_ID` e `AWS_SECRET_ACCESS_KEY`. Ref.: [secrets no GitHub Actions](https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions).
 3. Em `.github/workflows/cicd-front.yml`, troque `front-quiz-lab` por `front-<seu project>-lab` (duas vezes).
 4. Em `.github/workflows/cicd-back.yml`, troque `lambda-quiz-lab` por `lambda-<seu project>-lab`.
-5. Ainda dentro de `terraform/`, aponte o front para a sua infraestrutura:
+5. Ainda dentro de `terraform/`, aponte o front para a sua infraestrutura criando as Variables do repositório. O `cicd-front` passa essas variáveis para o build; arquivos `.env` não vão para o Git.
 
 ```bash
-cat > ../app/frontend/.env.production <<EOF
-VITE_API_URL=$(terraform output -raw api_url)
-VITE_USER_POOL_ID=$(terraform output -raw user_pool_id)
-VITE_USER_POOL_CLIENT_ID=$(terraform output -raw user_pool_client_id)
-EOF
+gh variable set VITE_API_URL --body "$(terraform output -raw api_url)"
+gh variable set VITE_USER_POOL_ID --body "$(terraform output -raw user_pool_id)"
+gh variable set VITE_USER_POOL_CLIENT_ID --body "$(terraform output -raw user_pool_client_id)"
+gh variable list
 ```
 
-Ref.: [variáveis de ambiente no Vite](https://vite.dev/guide/env-and-mode).
+Se a infraestrutura mudar, rode os mesmos comandos de novo. Ref.: [gh variable set](https://cli.github.com/manual/gh_variable_set), [variables no GitHub Actions](https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/use-variables), [variáveis de ambiente no Vite](https://vite.dev/guide/env-and-mode).
 
 ## 6. Fazer o deploy pelo pipeline
 
@@ -84,8 +84,10 @@ git commit -m "chore: aponta o projeto para a minha conta AWS"
 git push
 ```
 
-- **Front:** o push altera `app/frontend`, então o `cicd-front` roda sozinho: build, envio ao S3 e invalidação do CloudFront.
-- **Back:** em **Actions → cicd-back → Run workflow**, rode o pipeline manualmente na `main`. Ele empacota o código com as dependências e atualiza a Lambda. Ref.: [rodar um workflow manualmente](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/manually-run-a-workflow).
+Em **Actions**, rode os dois pipelines manualmente na `main` (**Run workflow**). Ref.: [rodar um workflow manualmente](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/manually-run-a-workflow).
+
+- **Front (`cicd-front`):** build com as Variables do passo 5, envio ao S3 e invalidação do CloudFront.
+- **Back (`cicd-back`):** empacota o código com as dependências e atualiza a Lambda.
 
 Espere os dois ficarem verdes.
 

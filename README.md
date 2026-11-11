@@ -2,4 +2,4 @@
 
 <p align="center"><img src="docs/architecture.gif" alt="Arquitetura AWS do Quiz Guilda DevOps: front-end-layer, back-end-layer e data-layer" /></p>
 
-Para recriar a aplicação na sua conta AWS, siga a [receita de bolo](docs/receita-de-bolo.md) ([PDF](docs/receita-de-bolo.pdf)).
+Para recriar a aplicação na sua conta AWS, siga a [passo a passo](docs/passo-a-passo.md) ([PDF](docs/passo-a-passo.pdf)).

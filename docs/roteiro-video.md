@@ -61,9 +61,9 @@ Abas abertas antes de gravar: app no ar, `docs/architecture.drawio` no draw.io, 
 
 ## 8. Como reproduzir (9:00–9:30)
 
-**Tela:** `docs/receita-de-bolo.md` no GitHub.
+**Tela:** `docs/passo-a-passo.md` no GitHub.
 
-**Fala:** "A receita de bolo no repositório mostra como subir tudo em outra conta AWS com poucos comandos."
+**Fala:** "O passo a passo no repositório mostra como subir tudo em outra conta AWS com poucos comandos."
 
 ## 9. Encerramento (9:30–10:00)
 
