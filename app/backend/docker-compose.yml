@@ -7,6 +7,6 @@ services:
   s3mock:
     image: adobe/s3mock:5.2.3
     environment:
-      COM_ADOBE_TESTING_S3MOCK_STORE_INITIAL_BUCKETS: mural
+      COM_ADOBE_TESTING_S3MOCK_STORE_INITIAL_BUCKETS: wall
     ports:
       - "9090:9090"

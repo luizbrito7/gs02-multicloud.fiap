@@ -3,13 +3,13 @@ import { toast } from 'sonner'
 import { useParams } from 'react-router'
 import { api } from '../api'
 
-export default function Mural() {
+export default function Wall() {
   const { id } = useParams()
   const [photos, setPhotos] = useState([])
   const [sending, setSending] = useState(false)
 
   useEffect(() => {
-    api(`/quizzes/${id}/mural`).then(setPhotos)
+    api(`/quizzes/${id}/wall`).then(setPhotos)
   }, [id])
 
   async function upload(event) {
@@ -19,7 +19,7 @@ export default function Mural() {
     try {
       const { url } = await api(`/quizzes/${id}/photo`, { method: 'POST', body: { contentType: file.type } })
       await fetch(url, { method: 'PUT', body: file, headers: { 'Content-Type': file.type } })
-      setPhotos(await api(`/quizzes/${id}/mural`))
+      setPhotos(await api(`/quizzes/${id}/wall`))
     } catch (err) {
       toast.error(err.message)
     } finally {

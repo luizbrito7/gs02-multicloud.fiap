@@ -23,7 +23,7 @@ export default function Quiz() {
         <p className="mt-6 text-4xl font-semibold text-primary">{quiz.score} de {quiz.total}</p>
         <p className="mt-1 text-sm text-zinc-500">acertos</p>
         <div className="mt-8 flex gap-6 text-sm">
-          <TextLink to={`/quiz/${id}/mural`}>Enviar foto para o mural</TextLink>
+          <TextLink to={`/quiz/${id}/wall`}>Enviar foto para o mural</TextLink>
           <TextLink to="/ranking">Ver ranking</TextLink>
         </div>
       </>

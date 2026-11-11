@@ -25,7 +25,7 @@ export default function Home() {
                 {quiz.photo && ', foto enviada'}
               </p>
             </div>
-            <TextLink to={`/quiz/${quiz.id}/mural`}>Mural</TextLink>
+            <TextLink to={`/quiz/${quiz.id}/wall`}>Mural</TextLink>
             {quiz.score === null && (
               <Link to={`/quiz/${quiz.id}`} className="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white hover:bg-primary-hover">
                 Responder

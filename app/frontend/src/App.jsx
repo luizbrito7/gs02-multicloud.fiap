@@ -3,7 +3,7 @@ import { currentUser, signOut } from './auth'
 import Confirm from './pages/Confirm'
 import Home from './pages/Home'
 import Login from './pages/Login'
-import Mural from './pages/Mural'
+import Wall from './pages/Wall'
 import Quiz from './pages/Quiz'
 import Ranking from './pages/Ranking'
 import SignUp from './pages/SignUp'
@@ -17,7 +17,7 @@ export default function App() {
       <Route element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="quiz/:id" element={<Quiz />} />
-        <Route path="quiz/:id/mural" element={<Mural />} />
+        <Route path="quiz/:id/wall" element={<Wall />} />
         <Route path="ranking" element={<Ranking />} />
       </Route>
       <Route path="*" element={<Navigate to="/" replace />} />
