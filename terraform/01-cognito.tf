@@ -1,6 +1,6 @@
 # [DOC] - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cognito_user_pool
 resource "aws_cognito_user_pool" "this" {
-  name                     = "${local.project}-cognito-${local.env}"
+  name                     = "cognito-${local.project}-${local.env}"
   username_attributes      = ["email"]
   auto_verified_attributes = ["email"]
 
@@ -14,7 +14,7 @@ resource "aws_cognito_user_pool" "this" {
 
 # [DOC] - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cognito_user_pool_client
 resource "aws_cognito_user_pool_client" "this" {
-  name                          = "${local.project}-client-${local.env}"
+  name                          = "client-${local.project}-${local.env}"
   user_pool_id                  = aws_cognito_user_pool.this.id
   prevent_user_existence_errors = "ENABLED"
 }
