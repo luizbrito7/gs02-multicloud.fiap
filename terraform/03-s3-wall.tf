@@ -1,6 +1,7 @@
 # [DOC] - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket
 resource "aws_s3_bucket" "wall" {
-  bucket = "wall-${local.project}-${local.env}"
+  bucket        = "wall-${local.project}-${local.env}"
+  force_destroy = true
 }
 
 # [DOC] - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_cors_configuration

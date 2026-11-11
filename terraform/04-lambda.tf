@@ -33,7 +33,7 @@ resource "aws_iam_role_policy" "data" {
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
-      # dynamodb
+      
       {
         Action = [
           "dynamodb:GetItem",
@@ -45,7 +45,6 @@ resource "aws_iam_role_policy" "data" {
         Resource = aws_dynamodb_table.this.arn
       },
 
-      # s3
       {
         Action = [
           "s3:PutObject",
@@ -73,4 +72,16 @@ resource "aws_lambda_function" "this" {
       BUCKET_NAME = aws_s3_bucket.wall.bucket
     }
   }
+}
+
+# [DOC] - https://developer.hashicorp.com/terraform/language/import
+import {
+  to = aws_cloudwatch_log_group.lambda
+  id = "/aws/lambda/lambda-${local.project}-${local.env}"
+}
+
+# [DOC] - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_group
+resource "aws_cloudwatch_log_group" "lambda" {
+  name              = "/aws/lambda/${aws_lambda_function.this.function_name}"
+  retention_in_days = 7
 }
