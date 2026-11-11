@@ -19,6 +19,6 @@
 
 ## IaC
 
-- Terraform: uma pasta, um arquivo por camada, sem módulos.
+- Terraform: uma pasta, um arquivo por serviço, sem módulos.
 
 
