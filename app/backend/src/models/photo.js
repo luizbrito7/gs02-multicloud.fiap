@@ -11,4 +11,4 @@ export const uploadUrl = (Key, ContentType) =>
   getSignedUrl(s3, new PutObjectCommand({ Bucket, Key, ContentType }), { expiresIn: 300 })
 
 export const downloadUrl = (Key) =>
-  getSignedUrl(s3, new GetObjectCommand({ Bucket, Key }), { expiresIn: 3600 })
+  getSignedUrl(s3, new GetObjectCommand({ Bucket, Key }), { expiresIn: 300 })
