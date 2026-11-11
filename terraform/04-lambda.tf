@@ -74,12 +74,6 @@ resource "aws_lambda_function" "this" {
   }
 }
 
-# [DOC] - https://developer.hashicorp.com/terraform/language/import
-import {
-  to = aws_cloudwatch_log_group.lambda
-  id = "/aws/lambda/lambda-${local.project}-${local.env}"
-}
-
 # [DOC] - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_group
 resource "aws_cloudwatch_log_group" "lambda" {
   name              = "/aws/lambda/${aws_lambda_function.this.function_name}"
