@@ -11,7 +11,6 @@ locals {
   project = "quiz"
   env     = "lab"
   region  = "us-east-1"
-
   origins = ["http://localhost:5173", "https://${aws_cloudfront_distribution.this.domain_name}"]
 }
 
