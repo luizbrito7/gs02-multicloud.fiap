@@ -9,7 +9,7 @@ resource "aws_s3_bucket_cors_configuration" "wall" {
 
   cors_rule {
     allowed_methods = ["PUT"]
-    allowed_origins = ["http://localhost:5173"]
+    allowed_origins = local.origins
     allowed_headers = ["Content-Type"]
   }
 }

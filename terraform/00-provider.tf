@@ -11,6 +11,9 @@ locals {
   project = "quiz"
   env     = "lab"
   region  = "us-east-1"
+
+  # Origens do front liberadas no CORS (API Gateway e bucket do mural)
+  origins = ["http://localhost:5173", "https://quiz.luizbrito6.com.br"]
 }
 
 provider "aws" {
