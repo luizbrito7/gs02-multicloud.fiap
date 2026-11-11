@@ -1,3 +1,4 @@
+import { LayoutList, LogOut, Star, Trophy } from 'lucide-react'
 import { Navigate, NavLink, Outlet, Route, Routes, useNavigate } from 'react-router'
 import { currentUser, signOut } from './auth'
 import Confirm from './pages/Confirm'
@@ -32,26 +33,33 @@ function Layout() {
   const user = currentUser()
   if (!user) return <Navigate to="/login" replace />
 
-  const navClass = ({ isActive }) => (isActive ? 'text-zinc-900' : 'text-zinc-500 hover:text-zinc-900')
+  const navClass = ({ isActive }) =>
+    `flex h-16 items-center gap-2 border-b-2 ${isActive ? 'border-primary text-zinc-900' : 'border-transparent text-zinc-500 hover:text-zinc-900'}`
 
   return (
     <>
-      <header className="border-b border-zinc-200">
-        <div className="mx-auto flex max-w-2xl items-center gap-6 px-4 py-4 text-sm">
-          <span className="font-semibold text-primary">Quiz DevOps</span>
-          <nav className="flex gap-4">
-            <NavLink to="/" end className={navClass}>Quizzes</NavLink>
-            <NavLink to="/ranking" className={navClass}>Ranking</NavLink>
+      <header className="border-b border-zinc-200 bg-white">
+        <div className="mx-auto flex h-16 max-w-3xl items-center gap-10 px-4 text-sm">
+          <span className="flex items-center gap-2 font-semibold text-primary">
+            <Star className="size-5 fill-primary" />
+            QuizOps
+          </span>
+          <nav className="flex gap-8">
+            <NavLink to="/" end className={navClass}><LayoutList className="size-4" />Quizzes</NavLink>
+            <NavLink to="/ranking" className={navClass}><Trophy className="size-4" />Ranking</NavLink>
           </nav>
-          <button
-            className="ml-auto text-zinc-500 hover:text-zinc-900"
-            onClick={async () => { await signOut(); navigate('/login') }}
-          >
-            Sair
-          </button>
+          <div className="ml-auto flex items-center gap-6">
+            <span className="hidden text-zinc-500 sm:inline">{user.email}</span>
+            <button
+              className="flex items-center gap-2 text-zinc-500 hover:text-zinc-900"
+              onClick={async () => { await signOut(); navigate('/login') }}
+            >
+              <LogOut className="size-4" />Sair
+            </button>
+          </div>
         </div>
       </header>
-      <main className="mx-auto max-w-2xl px-4 py-10">
+      <main className="mx-auto max-w-3xl px-4 py-12">
         <Outlet />
       </main>
     </>

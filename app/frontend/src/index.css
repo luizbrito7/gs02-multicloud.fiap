@@ -5,3 +5,10 @@
   --color-primary: var(--color-violet-600);
   --color-primary-hover: var(--color-violet-700);
 }
+
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
