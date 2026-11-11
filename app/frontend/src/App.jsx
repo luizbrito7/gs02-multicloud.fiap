@@ -11,9 +11,11 @@ import SignUp from './pages/SignUp'
 export default function App() {
   return (
     <Routes>
-      <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<SignUp />} />
-      <Route path="/confirm" element={<Confirm />} />
+      <Route element={<Guest />}>
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/confirm" element={<Confirm />} />
+      </Route>
       <Route element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="quiz/:id" element={<Quiz />} />
@@ -54,4 +56,9 @@ function Layout() {
       </main>
     </>
   )
+}
+
+// Telas de login e cadastro: quem já está logado vai direto para a home.
+function Guest() {
+  return currentUser() ? <Navigate to="/" replace /> : <Outlet />
 }

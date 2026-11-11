@@ -56,6 +56,8 @@ export const resendCode = (email) => call(() => cognito.resendSignUpCode({ usern
 
 // Retorna false quando o e-mail ainda não foi confirmado.
 export async function signIn({ email, password }) {
+  // Sessão antiga no navegador (ex.: outro usuário ou pool recriado) bloqueia um novo login.
+  await cognito.signOut()
   const { nextStep } = await call(() => cognito.signIn({ username: email, password }))
   if (nextStep.signInStep === 'CONFIRM_SIGN_UP') {
     pendingPassword = password
