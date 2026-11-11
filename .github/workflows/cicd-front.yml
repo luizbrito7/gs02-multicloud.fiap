@@ -20,6 +20,10 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - run: npm ci && npm run build
+        env:
+          VITE_API_URL: ${{ vars.VITE_API_URL }}
+          VITE_USER_POOL_ID: ${{ vars.VITE_USER_POOL_ID }}
+          VITE_USER_POOL_CLIENT_ID: ${{ vars.VITE_USER_POOL_CLIENT_ID }}
       - run: aws s3 sync dist s3://front-quiz-lab --delete
       - run: |
           ID=$(aws cloudfront list-distributions --query "DistributionList.Items[?Origins.Items[0].DomainName=='front-quiz-lab.s3.us-east-1.amazonaws.com'].Id" --output text)
